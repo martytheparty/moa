@@ -1,0 +1,7 @@
+.item {
+    position: absolute;
+    border: 1px solid black;
+    background-color: #ddddff;
+    cursor: pointer;
+    padding: 3px;
+}

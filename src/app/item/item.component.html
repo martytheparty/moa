@@ -1,0 +1,8 @@
+<div
+    [id]="itemId"
+    class="item"
+    [attr.data-name]="item.name"
+    [attr.data-parent]="item.parent"
+    [attr.data-level]="item.level"
+    (click)="itemClicked()"
+    >{{item.name}}</div>
