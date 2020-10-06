@@ -5,6 +5,6 @@ import { Component } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'MAP-OF-ANGULAR';
+export class AppComponent {  
+  title = 'Marty The Party\'s MAP OF ANGULAR';
 }
