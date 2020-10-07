@@ -7,4 +7,6 @@ export interface Item {
     draggable?: boolean;
     connected?: boolean;
     parentId?: Number;
+    x: Number;
+    y: Number;
 }

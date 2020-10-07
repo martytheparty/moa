@@ -11,14 +11,13 @@ export class ItemComponent implements OnInit, AfterViewInit {
 
   @Input() item:Item;
   jsPlumb: any;
-  window: Window;
   itemId = "";
 
   constructor(
     private elementRef: ElementRef, 
-    private itemListService: PlumbService
+    private plumbService: PlumbService
     ) {
-    this.jsPlumb = itemListService.getPlumb();
+    this.jsPlumb = plumbService.getPlumb();
   }
 
   ngOnInit(): void {
@@ -27,11 +26,16 @@ export class ItemComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.elementRef.nativeElement;
-    this.itemListService.setDraggable(this.item, this.elementRef.nativeElement.firstChild);
-    this.itemListService.connectParent(this.item);
+    this.plumbService.setDraggable(this.item, this.elementRef.nativeElement.firstChild);
+    this.plumbService.connectParent(this.item);
   }
 
   itemClicked(): void {
+    console.log('ele-x', Number.parseInt(this.item.ele.style.left));
+    console.log('ele-y', Number.parseInt(this.item.ele.style.top));
+    this.item.x = Number.parseInt(this.item.ele.style.left);
+    this.item.y = Number.parseInt(this.item.ele.style.top);
+    this.plumbService.updateItem(this.item);
     console.log('clicked...', this.item);
   }
 

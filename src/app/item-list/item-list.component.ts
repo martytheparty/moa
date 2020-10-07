@@ -16,6 +16,12 @@ export class ItemListComponent implements OnInit {
 
   ngOnInit(): void {
     this.items = this.plumbService.items;
+
+    this.plumbService.items.subscribe(
+      (list) => {
+        console.log('=====> CHANGED', list);
+      }
+    );
   }
 
 }
