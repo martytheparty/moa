@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { Item } from './item';
-import { PlumbService } from './plumb.service';
+import { Item } from '../models/item';
+import { PlumbService } from '../services/plumb.service';
 
 @Component({
   selector: 'app-item-list',

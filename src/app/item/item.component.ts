@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, ElementRef, Input, OnInit } from '@angular/core';
-import { Item } from '../item-list/item';
-import { PlumbService } from '../item-list/plumb.service';
+import { Item } from '../models/item';
+import { PlumbService } from '../services/plumb.service';
 
 @Component({
   selector: 'app-item',
