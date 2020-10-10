@@ -19,7 +19,7 @@ export class ItemListComponent implements OnInit {
 
     this.plumbService.items.subscribe(
       (list) => {
-        //console.log('=====> CHANGED', list);
+        // console.log('=====> CHANGED', list);
       }
     );
   }

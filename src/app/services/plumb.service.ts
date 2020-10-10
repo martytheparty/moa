@@ -12,7 +12,7 @@ export class PlumbService {
   jsPlumb = (window as any).jsPlumb;
   localStorage: any;
 
-  constructor(private localStorageService: LocalStorageService) { 
+  constructor(private localStorageService: LocalStorageService) {
     this.localStorage = localStorageService.getLocalStorage();
     this.itemList = [
       { id: 1, name: 'NG', level: 0, x: 0, y: 0 },
@@ -28,11 +28,11 @@ export class PlumbService {
       { id: 11, name: 'Introduction', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
       { id: 12, name: 'Interpolation', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
       { id: 13, name: 'Template Statements', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
-      { id: 14, name: 'Binding Syntax', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },    
+      { id: 14, name: 'Binding Syntax', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
       { id: 15, name: 'Property Binding', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
-      { id: 16, name: 'Attribute, class, and style bindings', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },    
+      { id: 16, name: 'Attribute, class, and style bindings', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
       { id: 17, name: 'Event binding', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
-      { id: 18, name: 'Two-way binding', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },    
+      { id: 18, name: 'Two-way binding', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
       { id: 19, name: 'Template reference variables', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
       { id: 20, name: 'Inputs and Outputs', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
       { id: 21, name: 'Template expression operators', level: 3, parent: 'Templates', parentId: 10, x: 0, y: 0 },
@@ -106,7 +106,7 @@ export class PlumbService {
     this.items = new BehaviorSubject(this.itemList);
   }
 
-  getPlumb() {
+  getPlumb(): any {
     return this.jsPlumb;
   }
 
@@ -115,16 +115,16 @@ export class PlumbService {
     const pos = items.findIndex(
       (item) => {
         return (
-          item.name === currentItem.name && 
+          item.name === currentItem.name &&
           item.level === currentItem.level &&
           item.parent === currentItem.parent
-          )
+          );
       }
     );
     return pos;
   }
 
-  getItemById(id: Number): Item {
+  getItemById(id: number): Item {
     const items = this.items.value;
     const pos = items.findIndex(
       (item) => {
@@ -134,7 +134,7 @@ export class PlumbService {
     return items[pos];
   }
 
-  setDraggable(currentItem: Item, ele) {
+  setDraggable(currentItem: Item, ele): void {
     const items = this.items.value;
     const pos: number = this.getItemPos(currentItem);
     this.jsPlumb.draggable(ele, {});
@@ -143,18 +143,18 @@ export class PlumbService {
     this.items.next(items);
   }
 
-  connectParent(currentItem: Item) {
+  connectParent(currentItem: Item): any {
     if (currentItem.parent) {
       const parent = this.getItemById(currentItem.parentId);
       if (parent) {
         this.jsPlumb.connect(
-          { 
-            source: currentItem.ele, 
+          {
+            source: currentItem.ele,
             target: parent.ele,
-            paintStyle:{strokeWidth:3,stroke:'rgb(25,118,210)'},
-            anchors:["Top", "Bottom"],
-            endpointStyle:{radius:5},
-            detachable:false
+            paintStyle: { strokeWidth: 3, stroke: 'rgb(25,118,210)' },
+            anchors: ['Top', 'Bottom'],
+            endpointStyle: {radius: 5},
+            detachable: false
           }
         );
       }
@@ -162,7 +162,7 @@ export class PlumbService {
     }
   }
 
-  updateItem(item: Item) {
+  updateItem(item: Item): void {
     this.localStorage.setItem(item.id, JSON.stringify({x: item.x, y: item.y}));
     const items = this.items.value;
     const pos: number = this.getItemPos(item);

@@ -1,12 +1,12 @@
 export interface Item {
-    id: Number;
-    name: String;
-    level: Number;
+    id: number;
+    name: string;
+    level: number;
     ele?: any;
-    parent?: String;
+    parent?: string;
     draggable?: boolean;
     connected?: boolean;
-    parentId?: Number;
-    x: Number;
-    y: Number;
+    parentId?: number;
+    x: number;
+    y: number;
 }

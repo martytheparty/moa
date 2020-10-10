@@ -9,7 +9,7 @@ export class LocalStorageService {
 
   constructor() { }
 
-  getLocalStorage() {
+  getLocalStorage(): any {
     return this.localStorage;
   }
 }
