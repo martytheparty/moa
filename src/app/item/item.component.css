@@ -5,3 +5,9 @@
     cursor: pointer;
     padding: 3px;
 }
+
+.top {
+    border-radius: 14px;
+    border: 0px solid red;
+    background-color: white;
+}

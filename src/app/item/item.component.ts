@@ -26,17 +26,17 @@ export class ItemComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.elementRef.nativeElement;
+    this.elementRef.nativeElement.firstChild.style.left = this.item.x + 'px';
+    this.elementRef.nativeElement.firstChild.style.top = this.item.y + 'px';
     this.plumbService.setDraggable(this.item, this.elementRef.nativeElement.firstChild);
     this.plumbService.connectParent(this.item);
+
   }
 
   itemClicked(): void {
-    console.log('ele-x', Number.parseInt(this.item.ele.style.left));
-    console.log('ele-y', Number.parseInt(this.item.ele.style.top));
     this.item.x = Number.parseInt(this.item.ele.style.left);
     this.item.y = Number.parseInt(this.item.ele.style.top);
     this.plumbService.updateItem(this.item);
-    console.log('clicked...', this.item);
   }
 
 }

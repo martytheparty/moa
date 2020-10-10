@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Item } from '../models/item';
+import { LocalStorageService } from './local-storage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,8 +10,10 @@ export class PlumbService {
   private itemList: Item[] = [];
   items: BehaviorSubject<Item[]>;
   jsPlumb = (window as any).jsPlumb;
+  localStorage: any;
 
-  constructor() { 
+  constructor(private localStorageService: LocalStorageService) { 
+    this.localStorage = localStorageService.getLocalStorage();
     this.itemList = [
       { id: 1, name: 'NG', level: 0, x: 0, y: 0 },
       { id: 2, name: 'Main Concepts', level: 1, parent: 'NG', parentId: 1, x: 0, y: 0 },
@@ -43,7 +46,7 @@ export class PlumbService {
       { id: 29, name: 'DI Providers', level: 3, parent: 'Dependency Injection', parentId: 27, x: 0, y: 0  },
       { id: 30, name: 'DI in Action', level: 3, parent: 'Dependency Injection', parentId: 27, x: 0, y: 0  },
       { id: 31, name: 'Navigate the Component Tree', level: 3, parent: 'Dependency Injection', parentId: 27, x: 0, y: 0  },
-      { id: 32, name: 'Built-in Features', level: 1, parent: 'NG', parentId: 0, x: 0, y: 0 },
+      { id: 32, name: 'Built-in Features', level: 1, parent: 'NG', parentId: 1, x: 0, y: 0 },
       { id: 33, name: 'Routing & Navigation', level: 2, parent: 'Built-in Features', parentId: 32, x: 0, y: 0 },
       { id: 34, name: 'Forms', level: 2, parent: 'Built-in Features', parentId: 32, x: 0, y: 0 },
       { id: 35, name: 'Template Driven', level: 3, parent: 'Forms', parentId: 34, x: 0, y: 0 },
@@ -84,7 +87,22 @@ export class PlumbService {
       { id: 70, name: 'RXJS Library', level: 3, parent: 'RXJS', parentId: 68, x: 0, y: 0 },
       { id: 71, name: 'Observables in Angular', level: 3, parent: 'RXJS', parentId: 68, x: 0, y: 0 },
       { id: 72, name: 'Practical Usage', level: 3, parent: 'RXJS', parentId: 68, x: 0, y: 0 },
-    ]; 
+    ];
+
+    this.itemList.forEach(
+      (item) => {
+        const coordinates = this.localStorage.getItem(item.id);
+        if (coordinates) {
+          const coordinateObject = JSON.parse(coordinates);
+          item.x = coordinateObject.x;
+          item.y = coordinateObject.y;
+        } else {
+          item.x = 100;
+          item.y = 100;
+        }
+      }
+    );
+
     this.items = new BehaviorSubject(this.itemList);
   }
 
@@ -129,14 +147,23 @@ export class PlumbService {
     if (currentItem.parent) {
       const parent = this.getItemById(currentItem.parentId);
       if (parent) {
-        this.jsPlumb.connect({source:currentItem.ele, target:parent.ele});
-        console.log(`connect ${currentItem.ele} => ${parent.ele}`);
+        this.jsPlumb.connect(
+          { 
+            source: currentItem.ele, 
+            target: parent.ele,
+            paintStyle:{strokeWidth:3,stroke:'rgb(25,118,210)'},
+            anchors:["Top", "Bottom"],
+            endpointStyle:{radius:5},
+            detachable:false
+          }
+        );
       }
 
     }
   }
 
   updateItem(item: Item) {
+    this.localStorage.setItem(item.id, JSON.stringify({x: item.x, y: item.y}));
     const items = this.items.value;
     const pos: number = this.getItemPos(item);
     items[pos] = item;
