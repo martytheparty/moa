@@ -25,16 +25,25 @@ export class ItemComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.elementRef.nativeElement.firstChild.style.left = this.item.x + 'px';
-    this.elementRef.nativeElement.firstChild.style.top = this.item.y + 'px';
-    this.plumbService.setDraggable(this.item, this.elementRef.nativeElement.firstChild);
+    const nativeEle = this.elementRef.nativeElement.firstChild as HTMLElement;
+    this.setElePosition(nativeEle);
+    this.plumbService.setDraggable(this.item, nativeEle);
     this.plumbService.connectParent(this.item);
   }
 
+  setElePosition(ele: HTMLElement) {
+    ele.style.left = this.item.x + 'px';
+    ele.style.top = this.item.y + 'px';
+  }
+
   itemClicked(): void {
-    this.item.x = Number.parseInt(this.item.ele.style.left, 10);
-    this.item.y = Number.parseInt(this.item.ele.style.top, 10);
+    this.setItemPosition(this.item);
     this.plumbService.updateItem(this.item);
+  }
+
+  setItemPosition(item: Item) {
+    item.x = Number.parseInt(this.item.ele.style.left, 10);
+    item.y = Number.parseInt(this.item.ele.style.top, 10);
   }
 
 }

@@ -134,7 +134,7 @@ export class PlumbService {
     return items[pos];
   }
 
-  setDraggable(currentItem: Item, ele): void {
+  setDraggable(currentItem: Item, ele: HTMLElement): void {
     const items = this.items.value;
     const pos: number = this.getItemPos(currentItem);
     this.jsPlumb.draggable(ele, {});
