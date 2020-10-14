@@ -7,13 +7,13 @@ export const mockItems: Item[]  = [
         name: 'Angular', 
         level: 0, 
         x: 100, 
-        y: 100
+        y: 600
     }, {
         id: 2, 
         name: 'Branch 1', 
-        level: 0, 
-        x: 100, 
-        y: 200
+        level: 1, 
+        x: 400, 
+        y: 600
     }
 ];
 

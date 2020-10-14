@@ -11,17 +11,17 @@ import { PlumbService } from '../services/plumb.service';
 export class ItemListComponent implements OnInit {
 
   items: BehaviorSubject<Item[]>;
+  itemList: Item[] = [];
 
   constructor(private plumbService: PlumbService) { }
 
   ngOnInit(): void {
     this.items = this.plumbService.items;
-
-    this.plumbService.items.subscribe(
-      (list) => {
-        // console.log('=====> CHANGED', list);
-      }
-    );
+    this.plumbService.items.subscribe(this.setList.bind(this));
   }
+
+  setList(list: Item[]): void {
+    this.itemList = list;
+  } 
 
 }

@@ -13,4 +13,9 @@ describe('LocalStorageService', () => {
   it('should be created', () => {
     expect(service).toBeTruthy();
   });
+
+  it('should retrieve the local storage', () => {
+    expect(service.getLocalStorage()).toBeTruthy();
+  });
+
 });

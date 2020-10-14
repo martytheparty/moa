@@ -7,7 +7,7 @@ import { PlumbService } from '../services/plumb.service';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class ItemComponent implements OnInit, AfterViewInit {
+export class ItemComponent implements  AfterViewInit {
 
   @Input() item: Item;
   jsPlumb: any;
@@ -20,30 +20,30 @@ export class ItemComponent implements OnInit, AfterViewInit {
     this.jsPlumb = plumbService.getPlumb();
   }
 
-  ngOnInit(): void {
-    this.itemId = this.item.name.replace(/\W/g, '-') + this.item.level;
-  }
-
   ngAfterViewInit(): void {
     const nativeEle = this.elementRef.nativeElement.firstChild as HTMLElement;
-    this.setElePosition(nativeEle);
+    this.setElePosition(this.item, nativeEle);
     this.plumbService.setDraggable(this.item, nativeEle);
     this.plumbService.connectParent(this.item);
   }
 
-  setElePosition(ele: HTMLElement) {
+  setElePosition(item:Item, ele: HTMLElement) {
     ele.style.left = this.item.x + 'px';
     ele.style.top = this.item.y + 'px';
   }
 
   itemClicked(): void {
     this.setItemPosition(this.item);
-    this.plumbService.updateItem(this.item);
+    this.updateElementData(this.item);
   }
 
   setItemPosition(item: Item) {
-    item.x = Number.parseInt(this.item.ele.style.left, 10);
-    item.y = Number.parseInt(this.item.ele.style.top, 10);
+    item.x = Number.parseInt(item.ele.style.left, 10);
+    item.y = Number.parseInt(item.ele.style.top, 10);
+  }
+
+  updateElementData(item: Item): boolean {
+    return this.plumbService.updateItem(this.item);
   }
 
 }

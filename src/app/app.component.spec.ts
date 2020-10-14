@@ -1,6 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemComponent } from './item/item.component';
+import { MockPlumbService } from 'src/mocks/mock-plumb.service';
+import { PlumbService } from './services/plumb.service';
+
 
 describe('AppComponent', () => {
   const title = 'Marty The Party\'s MAP OF ANGULAR';
@@ -11,7 +16,15 @@ describe('AppComponent', () => {
         RouterTestingModule
       ],
       declarations: [
-        AppComponent
+        AppComponent,
+        ItemListComponent,
+        ItemComponent,
+      ],
+      providers: [ 
+        {
+          provide: PlumbService, 
+          useClass: MockPlumbService,
+        } 
       ],
     }).compileComponents();
   });

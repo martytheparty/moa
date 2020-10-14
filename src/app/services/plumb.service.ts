@@ -146,11 +146,12 @@ export class PlumbService {
   connectParent(currentItem: Item): any {
     if (currentItem.parent) {
       const parent = this.getItemById(currentItem.parentId);
-      if (parent) {
+      const ele = parent.ele;
+      if (ele) {
         this.jsPlumb.connect(
           {
             source: currentItem.ele,
-            target: parent.ele,
+            target: ele,
             paintStyle: { strokeWidth: 3, stroke: 'rgb(25,118,210)' },
             anchors: ['Top', 'Bottom'],
             endpointStyle: {radius: 5},
@@ -162,13 +163,13 @@ export class PlumbService {
     }
   }
 
-  updateItem(item: Item): void {
+  updateItem(item: Item): boolean {
     this.localStorage.setItem(item.id, JSON.stringify({x: item.x, y: item.y}));
     const items = this.items.value;
     const pos: number = this.getItemPos(item);
     items[pos] = item;
     this.items.next(items);
-
+    return true;
   }
 
 }
