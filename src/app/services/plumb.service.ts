@@ -96,9 +96,6 @@ export class PlumbService {
           const coordinateObject = JSON.parse(coordinates);
           item.x = coordinateObject.x;
           item.y = coordinateObject.y;
-        } else {
-          item.x = item.x || 100;
-          item.y = item.y || 100;
         }
       }
     );
