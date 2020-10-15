@@ -20,11 +20,11 @@ describe('AppComponent', () => {
         ItemListComponent,
         ItemComponent,
       ],
-      providers: [ 
+      providers: [
         {
-          provide: PlumbService, 
+          provide: PlumbService,
           useClass: MockPlumbService,
-        } 
+        }
       ],
     }).compileComponents();
   });

@@ -20,7 +20,7 @@ export class MockPlumbService {
     this.items = new BehaviorSubject(this.itemList);
    }
 
-  getPlumb() {
+  getPlumb(): any {
     return this.jsPlumb;
   }
 
@@ -37,7 +37,7 @@ export class MockPlumbService {
     currentItem.connected = true;
   }
 
-  getItems() {
+  getItems(): Item[] {
     return this.itemList;
   }
 

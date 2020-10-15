@@ -22,6 +22,6 @@ export class ItemListComponent implements OnInit {
 
   setList(list: Item[]): void {
     this.itemList = list;
-  } 
+  }
 
 }

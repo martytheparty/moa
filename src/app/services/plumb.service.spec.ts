@@ -11,11 +11,11 @@ describe('PlumbService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [ 
+      providers: [
         {
-          provide: LocalStorageService, 
+          provide: LocalStorageService,
           useClass: MockLocalStorageService,
-        } 
+        }
       ]
     });
     service = TestBed.inject(PlumbService);
@@ -25,7 +25,7 @@ describe('PlumbService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('should return the local instance of jsPlumb',  () => { 
+  it('should return the local instance of jsPlumb',  () => {
     expect(service.getPlumb()).toBeTruthy();
   });
 
@@ -69,7 +69,7 @@ describe('PlumbService', () => {
     // connect child item (it has nothing to connect to)
     service.connectParent(childItem);
     expect(Array.from(ele.classList).find(className => (className === 'jtk-connected') )).toBeTruthy();
-  });  
+  });
 
   it('should update the item\'s position', () => {
     // setup child item
@@ -80,10 +80,8 @@ describe('PlumbService', () => {
     service.setDraggable(childItem, ele);
     // setup parent item
     service.updateItem(childItem);
-    
     const currentItem = service.getItemById(childItem.id);
     expect(currentItem.x).toBeTruthy(childItem.x);
-  });  
-
+  });
 
 });

@@ -11,17 +11,16 @@ describe('ItemListComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ 
+      declarations: [
         ItemListComponent,
         ItemComponent
       ],
-      providers: [ 
+      providers: [
         {
-          provide: PlumbService, 
+          provide: PlumbService,
           useClass: MockPlumbService,
-        } 
+        }
       ],
-      
     })
     .compileComponents();
   });
@@ -43,7 +42,7 @@ describe('ItemListComponent', () => {
 
   it('set list callback function should set the list', () => {
     component.itemList = [];
-    expect(component.itemList.length).toEqual(0); 
+    expect(component.itemList.length).toEqual(0);
     const items = mockPlumbService.getItems();
     component.setList(items);
     expect(items.length).toEqual(component.itemList.length);

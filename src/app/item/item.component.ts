@@ -28,7 +28,7 @@ export class ItemComponent implements  AfterViewInit {
     this.plumbService.connectParent(this.item);
   }
 
-  setElePosition(item:Item, ele: HTMLElement) {
+  setElePosition(item: Item, ele: HTMLElement): void {
     ele.style.left = this.item.x + 'px';
     ele.style.top = this.item.y + 'px';
   }
@@ -38,7 +38,7 @@ export class ItemComponent implements  AfterViewInit {
     this.updateElementData(this.item);
   }
 
-  setItemPosition(item: Item) {
+  setItemPosition(item: Item): void {
     item.x = Number.parseInt(item.ele.style.left, 10);
     item.y = Number.parseInt(item.ele.style.top, 10);
   }

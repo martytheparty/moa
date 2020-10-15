@@ -11,7 +11,7 @@ import { Injectable } from '@angular/core';
 
     getItem(id: number): string {
         if (id === 1) {
-            return "{\"x\":1739,\"y\":64}";
+            return '{\"x\":1739,\"y\":64}';
         }
         return undefined;
     }
@@ -21,9 +21,9 @@ import { Injectable } from '@angular/core';
     }
 
     getLocalStorage(): any {
-        const ls = {};
-        ls['getItem'] = this.getItem;
-        ls['setItem'] = this.setItem;
+        const ls: any = {};
+        ls.getItem = this.getItem;
+        ls.setItem = this.setItem;
         return ls;
     }
 }
