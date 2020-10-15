@@ -134,11 +134,17 @@ export class PlumbService {
     return items[pos];
   }
 
+  attachElementToItem(currentItem: Item, ele: HTMLElement): void {
+    const items = this.items.value;
+    const pos: number = this.getItemPos(currentItem);
+    items[pos].ele = ele;
+    this.items.next(items);
+  }
+
   setDraggable(currentItem: Item, ele: HTMLElement): void {
     const items = this.items.value;
     const pos: number = this.getItemPos(currentItem);
     this.jsPlumb.draggable(ele, {});
-    items[pos].ele = ele;
     items[pos].draggable = true;
     this.items.next(items);
   }

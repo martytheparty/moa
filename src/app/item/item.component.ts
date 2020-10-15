@@ -23,6 +23,7 @@ export class ItemComponent implements  AfterViewInit {
   ngAfterViewInit(): void {
     const nativeEle = this.elementRef.nativeElement.firstChild as HTMLElement;
     this.setElePosition(this.item, nativeEle);
+    this.plumbService.attachElementToItem(this.item, nativeEle);
     this.plumbService.setDraggable(this.item, nativeEle);
     this.plumbService.connectParent(this.item);
   }

@@ -56,11 +56,13 @@ describe('PlumbService', () => {
     // setup child item
     const ele = window.document.createElement('div');
     const childItem = service.items.value[1];
+    service.attachElementToItem(childItem, ele);
     service.setDraggable(childItem, ele);
     // setup parent item
     service.connectParent(childItem);
     const eleP = window.document.createElement('div');
     const parentItem = service.items.value[0];
+    service.attachElementToItem(parentItem, ele);
     service.setDraggable(parentItem, eleP);
     // connect parent item (it has nothing to connect to)
     service.connectParent(parentItem);

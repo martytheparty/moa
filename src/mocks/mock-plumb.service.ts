@@ -24,6 +24,10 @@ export class MockPlumbService {
     return this.jsPlumb;
   }
 
+  attachElementToItem(currentItem: Item, ele: HTMLElement): void {
+    currentItem.ele = ele;
+  }
+
   setDraggable(currentItem: Item, ele: HTMLElement): void {
     currentItem.draggable = true;
     ele.draggable = true;
