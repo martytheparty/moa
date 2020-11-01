@@ -7,17 +7,23 @@ import { PlumbService } from '../services/plumb.service';
   templateUrl: './item.component.html',
   styleUrls: ['./item.component.css']
 })
-export class ItemComponent implements  AfterViewInit {
+export class ItemComponent implements  AfterViewInit, OnInit {
 
   @Input() item: Item;
   jsPlumb: any;
   itemId = '';
+  positioned = false;
 
   constructor(
     private elementRef: ElementRef,
     private plumbService: PlumbService
     ) {
     this.jsPlumb = plumbService.getPlumb();
+
+  }
+
+  ngOnInit(): void {
+    this.itemId = 'item-'+this.item.id.toString();
   }
 
   ngAfterViewInit(): void {
@@ -26,11 +32,13 @@ export class ItemComponent implements  AfterViewInit {
     this.plumbService.attachElementToItem(this.item, nativeEle);
     this.plumbService.setDraggable(this.item, nativeEle);
     this.plumbService.connectParent(this.item);
+    //this.positioned = true;
   }
 
   setElePosition(item: Item, ele: HTMLElement): void {
     ele.style.left = this.item.x + 'px';
     ele.style.top = this.item.y + 'px';
+    ele.classList.add('positioned');
   }
 
   itemClicked(): void {
